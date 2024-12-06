@@ -1,5 +1,5 @@
 {
-  "name": "railway-fastify",
+  "name": "statx-server",
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
@@ -8,7 +8,7 @@
     "dev": "nodemon --watch src src/app.ts"
   },
   "keywords": [],
-  "author": "Faraz Patankar",
+  "author": "sunnymakespromises",
   "license": "ISC",
   "dependencies": {
     "@fastify/autoload": "^6.0.1",
