@@ -11,10 +11,6 @@ type Collection = {
 
 const getCollections: FastifyPluginAsync = async (fastify: FastifyInstance) => {
     fastify.get("/getCollections", async (request: FastifyRequest, reply: FastifyReply) => {
-        const collections: Collection[] = await fastify.read<Collection>({
-            tableName: "collections"
-        })
-
         const newCollection: Collection = await fastify.create<Collection>({
             tableName: "collections", 
             item: {
@@ -24,23 +20,8 @@ const getCollections: FastifyPluginAsync = async (fastify: FastifyInstance) => {
                 url: ",o,"
             }
         })
-
-        const collections2: Collection[] = await fastify.read<Collection>({
-            tableName: "collections", 
-            query: "name = 'hehe'"
-        })
-
-        const collections3: Collection[] = await fastify.read<Collection>({
-            tableName: "collections", 
-            query: "name = hehe"
-        })
-
-        return {
-            collections: collections,
-            newCollection: newCollection,
-            collections2: collections2,
-            collections3: collections3
-        }
+        
+        return "hiii"
     })
 }
 

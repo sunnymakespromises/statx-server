@@ -21,9 +21,12 @@ export default fp<SupportPluginOptions>(async (fastify, opts) => {
             // Creates the part of the query that says $1, $2, $3, depending on the number of keys in the item.
             const queryValuePlaceholders: string = itemKeys.map((key, index) => "$" + (index + 1)).join(", ")
             console.log(queryValuePlaceholders)
+            const queryColumns: string = itemKeys.join(", ")
+            console.log(queryColumns)
+            console.log("INSERT INTO " + tableName + " (" + queryColumns  + ") VALUES (" + queryValuePlaceholders + ")")
             const result: QueryResult<Type> = await client.query(
-                "INSERT INTO " + tableName + " (" + itemKeys.join(", ")  + ") VALUES (" + queryValuePlaceholders + ")",
-                [itemValues]
+                "INSERT INTO " + tableName + " (" + queryColumns  + ") VALUES (" + queryValuePlaceholders + ")",
+                itemValues
             )
             console.log(result)
             return result.rows[0]
