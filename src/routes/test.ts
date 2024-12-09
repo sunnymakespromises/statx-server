@@ -1,5 +1,3 @@
-/* tslint:disable:no-unused-variable */
-/* tslint:disable:no-unused-parameter */
 import fastifyPostgres from "@fastify/postgres"
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 import { PoolClient, QueryResult } from "pg"
