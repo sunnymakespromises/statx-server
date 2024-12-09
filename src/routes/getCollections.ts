@@ -1,27 +1,26 @@
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
 
-import { randomUUID, UUID } from "crypto"
+import Response from "../response/response"
 
 type Collection = {
-    id?: UUID,
+    id?: number,
     name?: string,
-    image?: string,
-    url?: string
+    imageURL?: string,
+    resourceURL?: string
 }
 
 const getCollections: FastifyPluginAsync = async (fastify: FastifyInstance) => {
-    fastify.get("/getCollections", async (request: FastifyRequest, reply: FastifyReply) => {
-        const newCollection: Collection = await fastify.create<Collection>({
+    fastify.get("/getCollections", async (request: FastifyRequest, reply: FastifyReply): Promise<Response> => {
+        let response = new Response()
+
+        const collections: Collection[] = await fastify.read<Collection>({
             tableName: "collections", 
-            item: {
-                id: randomUUID(),
-                name: "hehe",
-                image: "lol",
-                url: ",o,"
-            }
+            errors: response.errors
         })
         
-        return "hiii"
+        response.payload = collections
+
+        return response
     })
 }
 

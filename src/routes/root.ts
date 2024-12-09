@@ -1,14 +1,12 @@
-import { FastifyInstance, FastifyPluginAsync } from "fastify"
+import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
+
+import Response from "../response/response"
 
 const root: FastifyPluginAsync = async (fastify: FastifyInstance) => {
-    fastify.get("/", async (request, reply) => {
-
-        const response = {
-            message: "Welcome to Fastify Hello World API on Railway",
-            timestamp: new Date().toISOString(),
-        }
-
-        return response
+    fastify.get("/", async (request: FastifyRequest, reply: FastifyReply): Promise<Response> => {
+        return new Response({
+            payload: "ping!"
+        })
     })
 }
 
